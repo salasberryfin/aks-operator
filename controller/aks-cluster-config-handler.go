@@ -258,6 +258,10 @@ func (h *Handler) createCluster(config *aksv1.AKSClusterConfig) (*aksv1.AKSClust
 
 	logrus.Infof("Creating AKS cluster [%s]", config.Spec.ClusterName)
 
+	// TODO: delete this test
+	// ClusterName must be 1-63 characters long
+	// NodeResourceGroupName must be no greater than 80 characters in length
+	config.Spec.NodeResourceGroup = to.StringPtr("MC_csalas_from_rancher")
 	err = aks.CreateCluster(ctx, &h.azureClients.credentials, h.azureClients.clustersClient, h.azureClients.workplacesClient, &config.Spec, config.Status.Phase)
 	if err != nil {
 		return config, fmt.Errorf("error failed to create cluster: %v ", err)

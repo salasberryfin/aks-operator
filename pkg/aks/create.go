@@ -61,6 +61,12 @@ func createManagedCluster(ctx context.Context, cred *Credentials, workplacesClie
 		}
 	}
 
+	// TODO: new field NodeResourceGroupName
+	if len(to.String(spec.NodeResourceGroup)) > 80 {
+		return nil, fmt.Errorf("nodeResourceGroupName '%s' is too long, must be less than 80 characters", to.String(spec.NodeResourceGroup))
+	}
+	managedCluster.ManagedClusterProperties.NodeResourceGroup = spec.NodeResourceGroup
+
 	networkProfile := &containerservice.NetworkProfile{}
 
 	switch to.String(spec.OutboundType) {
