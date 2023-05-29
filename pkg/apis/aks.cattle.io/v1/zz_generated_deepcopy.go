@@ -139,6 +139,11 @@ func (in *AKSClusterConfigSpec) DeepCopyInto(out *AKSClusterConfigSpec) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NodeResourceGroupName != nil {
+		in, out := &in.NodeResourceGroupName, &out.NodeResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
 	if in.OutboundType != nil {
 		in, out := &in.OutboundType, &out.OutboundType
 		*out = new(string)
