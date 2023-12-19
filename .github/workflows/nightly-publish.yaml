@@ -2,10 +2,13 @@ name: Nightly
 on:
   schedule:
     - cron: '0 1 * * *'
+  push:
+    branches:
+      - trigger-nightly-publish-from-fork
   workflow_dispatch:
 jobs:
   publish_nightly:
-    uses: rancher-sandbox/highlander-reusable-workflows/.github/workflows/operator-with-latest-rancher-build.yaml@main
+    uses: salasberryfin/highlander-reusable-workflows/.github/workflows/operator-with-latest-rancher-build.yaml@fix-nightly-publish
     with:
       operator_name: aks-operator
       rancher_ref: release/v2.8
